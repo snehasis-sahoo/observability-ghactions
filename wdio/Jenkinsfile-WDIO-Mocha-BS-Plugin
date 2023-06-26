@@ -1,0 +1,77 @@
+pipeline {
+    agent any
+
+    tools {nodejs "NODEJS"}
+
+    stages {
+        stage('Setup Test Obserability Samples - WDIO Mocha') {
+            steps{
+                cleanWs()
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "*/$TEST_OBSERVABILITY_SAMPLES_BRANCH"]],
+                    extensions: [],
+                    userRemoteConfigs: [[credentialsId: '9750fa04-ea5c-44ca-a361-fda2af6e5aa3',
+                    url: 'git@github.com:browserstack/test-observability-samples.git']]])
+                
+                dir("nodejs") {
+                    sh 'pwd'
+                    sh 'rm -rf node_modules'
+                    sh 'npm cache clean --force'
+                    sh 'npm install'
+                    sh "sed -i -e 's/projectName/$BS_PROJECT_NAME/g' wdio-mocha-bs.conf.js"
+                    sh "sed -i -e 's/buildName/$BS_BUILD_NAME/g' wdio-mocha-bs.conf.js"
+                    sh "sed -i -e 's/projectName/$BS_PROJECT_NAME/g' wdio-mocha.conf.js"
+                    sh "sed -i -e 's/buildName/$BS_BUILD_NAME/g' wdio-mocha.conf.js"
+                }
+
+            }
+        }
+
+        stage('Setup WDIO') {
+            steps{
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "*/$NODE_AGENT_BRANCH"]],
+                    extensions: [    
+                        [$class: 'RelativeTargetDirectory', relativeTargetDir: 'nodejs/webdriverio']
+                    ],
+                    userRemoteConfigs: [[credentialsId: '9750fa04-ea5c-44ca-a361-fda2af6e5aa3',
+                    url: 'git@github.com:nagpalkaran95/webdriverio.git']]])
+
+                dir("nodejs/webdriverio") {
+                    sh 'pwd'
+                    sh 'rm -rf node_modules'
+                    sh 'npm cache clean --force'
+                    sh "sed -i -e 's/hub.browserstack.com/hub-devtestops.bsstag.com/g' src/bin/utils/constants.js"
+                    sh 'npm install'
+                    sh 'npm npm run setup-full'
+                    sh 'cd packages/wdio-browserstack-service; npm link'
+                    sh "sed -i -e 's/ARIARoleDefintionKey/ARIARoleDefinitionKey/g' packages/webdriverio/src/utils/findStrategy.ts"
+
+                
+                }
+                
+                dir("nodejs") {
+                    sh 'pwd'
+                    sh 'npm link @wdio/browserstack-service'
+                    sh "sed -i -e 's/testops-collector-stag.us-east-1.elasticbeanstalk.com/testops-collector-stag.us-east-1.elasticbeanstalk.com/g' nodejs/node_modules/@wdio/browserstack-service/build/constants.js"
+                    sh "sed -i -e 's/browser.options.hostname.includes('browserstack\')/browser.options.hostname.includes(\'browserstack\') || browser.options.hostname.includes(\'browserstack\')/g' nodejs/node_modules/@wdio/browserstack-service/build/constants.js"
+                }
+            }
+        }
+        
+        stage('Run e2e tests') {
+            steps{
+                dir("nodejs") {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        browserstack(credentialsId: '912d2341-f505-45fd-a115-76659ffc4318'){
+                            sh "sed -i -e 's/username/$BROWSERSTACK_USERNAME/g' browserstack.yml"
+                            sh "sed -i -e 's/access_key/$BROWSERSTACK_ACCESS_KEY/g' browserstack.yml"
+                            sh 'pwd'
+                            sh "BROWSERSTACK_TESTOPS_DEBUG_ENABLED=1 BROWSERSTACK_TEST_OBSERVABILITY=$BROWSERSTACK_TEST_OBSERVABILITY_FLAG BROWSERSTACK_INFRA=$BROWSERSTACK_INFRA npm run e2e-test-mocha-bs"
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}

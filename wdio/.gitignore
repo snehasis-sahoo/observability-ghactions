@@ -1,0 +1,9 @@
+/node_modules
+**/log
+*-e
+.DS_Store
+../.DS_Store
+/allure-report
+/allure-results
+/webdriverio
+app.log
