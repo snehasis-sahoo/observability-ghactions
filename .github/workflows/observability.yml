@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd wdio
+    - run: node -v
     - run: npm install
     - run: npm run e2e-test-wdio-cucumber-bs-regression
