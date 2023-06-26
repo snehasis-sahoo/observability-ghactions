@@ -19,7 +19,7 @@ jobs:
           access-key: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
       - uses: actions/checkout@v3
         with:
-          repository: 'https://github.com/emberjs/ember.js'
+          repository: emberjs/ember.js
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
