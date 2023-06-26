@@ -1,12 +1,14 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Observability Sample Regression Job
-on: [push, pull_request]
+name: Observability EmberJS Unit Test Job
+on:
+  schedule:
+    - cron: "* */4 * * *"
 
 jobs:
   ubuntu-job:
-    name: 'WDIO Cucumber Samples on Test Observability'
+    name: 'EmberJS Unit Tests on Test Observability'
     runs-on: ubuntu-latest
     steps:
       - name: 'BrowserStack Env Setup'
@@ -15,11 +17,14 @@ jobs:
           username:  ${{secrets.BROWSERSTACK_USERNAME}}
           access-key: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
       - uses: actions/checkout@v3
+        with:
+          repository: 'https://github.com/emberjs/ember.js'
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: node -v
+      - run: npm install browserstack-node-agent --save-dev
       - run: npm install
-      - run: npm run e2e-test-wdio-cucumber-bs-regression
+      - run: BROWSERSTACK_AUTOMATION=false browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js
