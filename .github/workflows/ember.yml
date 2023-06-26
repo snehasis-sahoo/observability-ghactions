@@ -26,6 +26,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: node -v
-      - run: npm install browserstack-node-agent --save-dev
+      - run: npm install browserstack-node-sdk@latest
       - run: npm install
-      - run: BROWSERSTACK_AUTOMATION=false browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js
+      - run: BROWSERSTACK_AUTOMATION=false npx browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js
