@@ -29,4 +29,4 @@ jobs:
       - run: npm install --force
       - run: npm install browserstack-node-sdk@v1.16.0 --force
       - run: echo -e "buildName:\ 'EmberJS Unit Tests'\nprojectName:\ 'WDIO Cucumber GH'" >> browserstack.yml
-      - run: BROWSERSTACK_AUTOMATION=false npx browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js
+      - run: BROWSERSTACK_AUTOMATION=false npx browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js --no-worker-threads
