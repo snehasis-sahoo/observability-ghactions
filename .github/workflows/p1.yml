@@ -5,6 +5,7 @@ name: Observability Sample p1 Job
 on:
   schedule:
     - cron: "45 */1 * * *"
+  workflow_dispatch:
 
 jobs:
   ubuntu-job:

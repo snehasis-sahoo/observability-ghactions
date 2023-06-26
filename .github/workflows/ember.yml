@@ -5,6 +5,7 @@ name: Observability EmberJS Unit Test Job
 on:
   schedule:
     - cron: "* */4 * * *"
+  workflow_dispatch:
 
 jobs:
   ubuntu-job:

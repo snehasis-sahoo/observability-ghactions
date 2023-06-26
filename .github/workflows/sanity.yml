@@ -5,6 +5,7 @@ name: Observability Sample Sanity Job
 on:
   schedule:
     - cron: "15 */4 * * MON-FRI"
+  workflow_dispatch:
 
 jobs:
   ubuntu-job:
