@@ -4,7 +4,7 @@
 name: Observability Sample Regression Job
 on:
   schedule:
-    - cron: "5 */8 * * MON-FRI"
+    - cron: "5 */8 * * *"
   workflow_dispatch:
 
 jobs:
