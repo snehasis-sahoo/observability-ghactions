@@ -9,7 +9,9 @@ class HomePage extends Page {
      */
 
     get browserstackLogo() {
-        return $('.Navbar_logo__26S5Y');
+        // return $('.Navbar_logo__26S5Y');
+        return $('.Navbar_logo__26Y');
+
     }
 
     get signInBtn() {
