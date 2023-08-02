@@ -10,7 +10,7 @@ Feature: BStack Demo Home Page Basic Components
   Scenario: Verify Browserstack Logo Text
     Given I go to Bstack Demo Homepage
     Then the logo should be visible on the page
-    And the logo text should be - empty
+    And the logo text should be - value
 
   Scenario: Verify Browserstack Logo Text - Fail
     When I go to Bstack Demo Homepage
