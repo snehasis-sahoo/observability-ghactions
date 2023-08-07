@@ -1,22 +1,4 @@
-const reportportal = require('wdio-reportportal-reporter');
-const RpService = require("wdio-reportportal-service");
-
-
 const conf = {
-    reportPortalClientConfig: { // report portal settings
-      token: '36fdb2fd-b72b-4a2d-b3f2-501d69db04cb',
-      endpoint: 'https://demo.reportportal.io/api/v1',
-      launch: 'akhilc7_TEST_EXAMPLE',
-      project: 'akhilc7_personal',
-      mode: 'DEFAULT',
-      debug: false,
-      description: "Launch description text",
-      attributes: [{key:"tag", value: "foo"}],
-      headers: {"foo": "bar"}, // optional headers for internal http client
-      restClientConfig: { // axios like http client config - https://github.com/axios/axios#request-config
-        timeout: 60000
-      }
-    },
     reportSeleniumCommands: false, // add selenium commands to log
     seleniumCommandsLogLevel: 'debug', // log level for selenium commands
     autoAttachScreenshots: false, // automatically add screenshots
@@ -150,7 +132,6 @@ exports.config = {
     user: '<bs-username>',
     key: '<bs-access-key>',
     services: [
-      [RpService, {}],
       'chromedriver',
         ['browserstack', {
             testObservability: true,
@@ -187,7 +168,7 @@ exports.config = {
     
         
     //allure reports
-    reporters: [[reportportal, conf], ['allure', {
+    reporters: [[conf], ['allure', {
         outputDir: 'allure-results',
         disableMochaHooks: false,
     }]],
