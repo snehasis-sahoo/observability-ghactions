@@ -4,7 +4,7 @@
 name: Observability Sample Sanity Job - Group 2
 on:
   schedule:
-    - cron: "15 */4 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:

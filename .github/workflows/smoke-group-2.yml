@@ -4,7 +4,7 @@
 name: Observability Sample Smoke Job - Group 2
 on:
   schedule:
-    - cron: "30 */2 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
