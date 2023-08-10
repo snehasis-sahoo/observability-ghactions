@@ -4,7 +4,7 @@
 name: Observability Sample Regression Job - Group 2
 on:
   schedule:
-    - cron: "5 */8 * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 jobs:
