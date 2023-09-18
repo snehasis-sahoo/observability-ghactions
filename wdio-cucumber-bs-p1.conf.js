@@ -324,7 +324,7 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
      onComplete: function(exitCode, config, capabilities, results) {
-        console.log(process.env.BS_TESTOPS_BUILD_HASHED_ID);
+        console.log(`\The URL is https://observability.browserstack.com/builds/${process.env.BS_TESTOPS_BUILD_HASHED_ID}\n`)
      },
     /**
     * Gets executed when a refresh happens.
