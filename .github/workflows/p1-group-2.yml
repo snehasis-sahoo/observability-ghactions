@@ -26,5 +26,5 @@ jobs:
       - run: node -v
       - run: npm install
       - run: npm run e2e-test-wdio-cucumber-bs-p1
-      - run: echo "{BS_TESTOPS_BUILD_HASHED_ID}" >> "$GITHUB_ENV"
-      - run: echo "$GITHUB_ENV"
+      - run: echo "::notice::BrowserStack URL - https://observability.browserstack.com/builds/$buildUUID"
+
