@@ -26,6 +26,10 @@ jobs:
       - run: node -v
       - run: npm install
       - run: npm run e2e-test-wdio-cucumber-bs-regression
-      - run: echo "{BS_TESTOPS_BUILD_HASHED_ID}" >> "$GITHUB_ENV"
-      - run: echo "$GITHUB_ENV"
+      - name: Save env variable
+        if: always()
+        run: echo "{BS_TESTOPS_BUILD_HASHED_ID}" >> "$GITHUB_ENV"
+      - name: Print env variable
+        if: always()
+        run: echo "$GITHUB_ENV"
 
