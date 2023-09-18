@@ -1,3 +1,6 @@
+import * as fs from 'fs'
+import * as os from 'os'
+
 exports.config = {
     //
     // ====================
@@ -324,6 +327,9 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
      onComplete: function(exitCode, config, capabilities, results) {
+        fs.appendFileSync(process.env.GITHUB_ENV, `buildUUID=${process.env.BS_TESTOPS_BUILD_HASHED_ID}`, {
+            encoding: 'utf8'
+        })
         console.log(`\The URL is https://observability.browserstack.com/builds/${process.env.BS_TESTOPS_BUILD_HASHED_ID}\n`)
      },
     /**
