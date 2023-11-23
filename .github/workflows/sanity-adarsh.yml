@@ -4,7 +4,7 @@
 name: Observability Sample Sanity Job - Adarsh Mehta
 on:
   schedule:
-    - cron: "15 */4 * * *"
+    - cron: "15 */1 * * *"
   workflow_dispatch:
 
 jobs:
