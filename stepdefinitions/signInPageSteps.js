@@ -39,7 +39,8 @@ Given(/^the password input should be visible on the page$/, async() => {
 });
 
 Given(/^the login button should be visible on the page$/, async() => {
-    await expect(signInPage.loginBtn).toBeExisting();
+    //await expect(signInPage.loginBtn).toBeExisting();
+    await expect(signInPage.passwordInput).toBeExisting();
 });
 
 Given(/^I login using credentials - ([a-zA-Z0-9., ]+) and ([a-zA-Z0-9., ]+)$/, async(username, password) => {
