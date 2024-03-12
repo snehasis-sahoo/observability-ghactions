@@ -50,7 +50,7 @@ exports.config = {
         {
           browserName: 'Chrome',
           'bstack:options': {
-            browserVersion: 'latest',
+            browserVersion: 'latest-1',
             os: 'Windows',
             osVersion: '10',
             debug: 'true',
