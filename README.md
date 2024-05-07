@@ -20,4 +20,3 @@ This is a Sample WDIO Project to demonstrate how Test Observability works.
 8. To check the test suite results go to - [Observability Dashboard](https://observability.browserstack.com/) 
 9. To generate allure reports - ```npm run allure-generate```
 
-Adding new line as sample commit
