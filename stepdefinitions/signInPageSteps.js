@@ -1,6 +1,6 @@
 import { Given, Then, When } from '@wdio/cucumber-framework';
 import signInPage from '../pageobjects/bstack-demo/signIn.page.js';
-import signInAppErrorPage from '../pageobjects/bstack-demo/signIn.app.error.page';
+import signInAppErrorPage from '../pageobjects/bstack-demo/signIn.app.error.page.js';
 
 const winston = require('winston');
 
