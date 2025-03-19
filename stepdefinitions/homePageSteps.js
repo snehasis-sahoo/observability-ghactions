@@ -1,4 +1,4 @@
-import { Given, Then, When, Step } from '@wdio/cucumber-framework';
+import { Given, Then, When } from '@wdio/cucumber-framework';
 import homePage from '../pageobjects/bstack-demo/home.page.js';
 
 Given(/^I go to Bstack Demo Homepage$/, async () => {
