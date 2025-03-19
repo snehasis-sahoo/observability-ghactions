@@ -1,6 +1,7 @@
 import { assert } from 'chai';
 import { Given, Then, When} from '@wdio/cucumber-framework';
-const winston = require('winston');
+import winston from 'winston';
+import log4js from 'log4js';
 
 const logConfiguration = {
     'transports': [
