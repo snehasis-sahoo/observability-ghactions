@@ -13,7 +13,6 @@ const logConfiguration = {
 };
 const loggerWinston = winston.createLogger(logConfiguration);
 
-var log4js = require("log4js");
 log4js.configure({
     appenders: { app: { type: 'file', filename: 'app.log' } },
     categories: { default: { appenders: ['app'], level: 'all' } }
