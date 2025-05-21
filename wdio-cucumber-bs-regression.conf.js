@@ -52,7 +52,8 @@ exports.config = {
             osVersion: '10',
             debug: 'true',
             networkLogs: 'true',
-            consoleLogs: 'verbose'
+            consoleLogs: 'verbose',
+            performance: 'assert'
           }
         },
         {
@@ -63,6 +64,7 @@ exports.config = {
             osVersion: '10',
             debug: 'true',
             networkLogs: 'true',
+            performance: 'assert',
             consoleLogs: 'verbose'
           }
         },
@@ -85,6 +87,7 @@ exports.config = {
             osVersion: '11',
             debug: 'true',
             networkLogs: 'true',
+            performance: 'assert',
             consoleLogs: 'verbose'
           }
         },
@@ -96,6 +99,7 @@ exports.config = {
             osVersion: '10',
             debug: 'true',
             networkLogs: 'true',
+            performance: 'assert',
             consoleLogs: 'verbose'
           }
         },
