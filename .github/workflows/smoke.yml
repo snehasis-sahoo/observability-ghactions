@@ -17,11 +17,6 @@ jobs:
         node-version: [18]
     environment: ${{ matrix.environment }}
     steps:
-      - name: 'Print Variables for testing'
-        run: |
-          echo "Environment: ${{ matrix.environment }}"
-          echo "Node Version: ${{ matrix.node-version }}"
-          echo "User: ${{ vars.USER }}"
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
         with:
