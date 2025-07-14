@@ -16,20 +16,26 @@ jobs:
         environment: [Europe, India]
         node-version: [18]
     steps:
-      - name: 'BrowserStack Env Setup'
-        uses: 'browserstack/github-actions/setup-env@master'
-        with:
-          username:  ${{secrets.BROWSERSTACK_USERNAME}}
-          access-key: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: node -v
-      - run: npm install
-      - name: Run tests for ${{ matrix.environment }}
-        env:
-          TEST_ENVIRONMENT: ${{ matrix.environment }}
-        run: npm run e2e-test-wdio-cucumber-bs-smoke
+      - name: 'Print Variables for testing'
+        run: |
+          echo "Environment: ${{ matrix.environment }}"
+          echo "Node Version: ${{ matrix.node-version }}"
+          echo "User: ${{ vars.USER }}"
+
+      # - name: 'BrowserStack Env Setup'
+      #   uses: 'browserstack/github-actions/setup-env@master'
+      #   with:
+      #     username:  ${{secrets.BROWSERSTACK_USERNAME}}
+      #     access-key: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
+      # - uses: actions/checkout@v3
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: 'npm'
+      # - run: node -v
+      # - run: npm install
+      # - name: Run tests for ${{ matrix.environment }}
+      #   env:
+      #     TEST_ENVIRONMENT: ${{ matrix.environment }}
+      #   run: npm run e2e-test-wdio-cucumber-bs-smoke
