@@ -8,9 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  ubuntu-job:
-    name: 'WDIO Cucumber Smoke Samples on Test Observability'
+  test-multi-environment:
+    name: 'WDIO Cucumber Smoke Samples on Test Observability - ${{ matrix.environment }}'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [Europe, India]
+        node-version: [18]
     steps:
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
@@ -25,4 +29,7 @@ jobs:
           cache: 'npm'
       - run: node -v
       - run: npm install
-      - run: npm run e2e-test-wdio-cucumber-bs-smoke
+      - name: Run tests for ${{ matrix.environment }}
+        env:
+          TEST_ENVIRONMENT: ${{ matrix.environment }}
+        run: npm run e2e-test-wdio-cucumber-bs-smoke
