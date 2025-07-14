@@ -15,8 +15,8 @@ jobs:
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
         with:
-          username:  ${{secrets.BSTACK_UNAME_ADARSH}}
-          access-key: ${{secrets.BSTACK_AKEY_ADARSH}}
+          username:  ${{secrets.BROWSERSTACK_USERNAME}}
+          access-key: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
