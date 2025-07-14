@@ -111,7 +111,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
 
-    //hub: 'hub-devtestops.bsstag.com',
+    hub: process.env.BROWSERSTACK_HUB || 'hub-cloud.browserstack.com',
     user: '<bs-username>',
     key: '<bs-access-key>',
     services: [
