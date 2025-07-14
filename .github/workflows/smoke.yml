@@ -15,6 +15,7 @@ jobs:
       matrix:
         environment: [Europe, India]
         node-version: [18]
+    environment: ${{ matrix.environment }}
     steps:
       - name: 'Print Variables for testing'
         run: |
