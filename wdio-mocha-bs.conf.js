@@ -112,6 +112,7 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
 
     hub: process.env.BROWSERSTACK_HUB || 'hub-cloud.browserstack.com',
+    hostname: process.env.BROWSERSTACK_HUB || 'hub-cloud.browserstack.com',
     user: '<bs-username>',
     key: '<bs-access-key>',
     services: [
