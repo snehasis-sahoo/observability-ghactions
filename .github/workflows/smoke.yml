@@ -33,4 +33,5 @@ jobs:
       - name: Run tests for ${{ matrix.environment }}
         env:
           TEST_ENVIRONMENT: ${{ matrix.environment }}
+          BROWSERSTACK_HUB: ${{ vars.HUB_URL }}
         run: npm run e2e-test-wdio-cucumber-bs-smoke
