@@ -8,9 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  ubuntu-job:
-    name: 'EmberJS Unit Tests on Test Observability'
+  test-multi-environment:
+    name: 'EmberJS Unit Tests on Test Observability - ${{ matrix.environment }}'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [Europe, India]
+        node-version: [18]
+    environment: ${{ matrix.environment }}
     steps:
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
@@ -29,4 +34,8 @@ jobs:
       - run: cd ember.js
       - run: npm install --force
       - run: npm install browserstack-node-sdk@latest
-      - run: BROWSERSTACK_AUTOMATION=false npx browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js --no-worker-threads
+      - name: Run tests for ${{ matrix.environment }}
+        env:
+          TEST_ENVIRONMENT: ${{ matrix.environment }}
+          BROWSERSTACK_HUB: ${{ vars.HUB_URL }}
+        run: BROWSERSTACK_AUTOMATION=false npx browserstack-node-sdk mocha node-tests/blueprints/**/*-test.js --no-worker-threads

@@ -8,9 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  ubuntu-job:
-    name: 'WDIO Cucumber Sanity Samples on Test Observability'
+  test-multi-environment:
+    name: 'WDIO Cucumber Sanity Samples on Test Observability - ${{ matrix.environment }}'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [Europe, India]
+        node-version: [18]
+    environment: ${{ matrix.environment }}
     steps:
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
@@ -25,4 +30,8 @@ jobs:
           cache: 'npm'
       - run: node -v
       - run: npm install
-      - run: npm run e2e-test-wdio-cucumber-bs-sanity
+      - name: Run tests for ${{ matrix.environment }}
+        env:
+          TEST_ENVIRONMENT: ${{ matrix.environment }}
+          BROWSERSTACK_HUB: ${{ vars.HUB_URL }}
+        run: npm run e2e-test-wdio-cucumber-bs-sanity
