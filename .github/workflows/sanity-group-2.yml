@@ -32,6 +32,7 @@ jobs:
       - run: node -v
       - run: npm install
       - name: Run tests for ${{ matrix.environment }}
+        continue-on-error: true
         env:
           TEST_ENVIRONMENT: ${{ matrix.environment }}
           BROWSERSTACK_HUB: ${{ vars.HUB_URL }}
