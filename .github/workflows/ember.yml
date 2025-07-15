@@ -12,6 +12,7 @@ jobs:
     name: 'EmberJS Unit Tests on Test Observability - ${{ matrix.environment }}'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         environment: [Europe, India]
         node-version: [18]
