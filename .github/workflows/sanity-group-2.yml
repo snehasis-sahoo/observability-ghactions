@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        environment: [Europe, India]
+        environment: [Europe, India, Australia]
         node-version: [18]
     environment: ${{ matrix.environment }}
     steps:
